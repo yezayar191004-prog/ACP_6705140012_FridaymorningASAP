@@ -18,9 +18,9 @@ class Vehicle:
 
 class Renter:
     def __init__(self, name, license_no):
+        self.rented = []
         self.name = name
         self.license_no = license_no
-        self.rented = []
 
     @property
     def name(self):
@@ -38,4 +38,26 @@ class Renter:
 
     @license_no.setter
     def license_no(self, value):
-        if isinstance(value, bool) or no...
+        if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+            raise ValueError("Licence number must be a positive integer.")
+        self._license_no = value
+
+
+class ElectricCar(Vehicle):
+    def __init__(self, make, model, plate, battery_kwh):
+        super().__init__(make, model, plate)
+        self.battery_kwh = battery_kwh
+
+    def __str__(self):
+        status = "rented" if self.is_rented else "available"
+        return f"ElectricCar: {self.make} {self.model} ({self.plate}) [{status}] Battery: {self.battery_kwh} kWh"
+
+
+class Motorbike(Vehicle):
+    def __init__(self, make, model, plate, engine_cc):
+        super().__init__(make, model, plate)
+        self.engine_cc = engine_cc
+
+    def __str__(self):
+        status = "rented" if self.is_rented else "available"
+        return f"Motorbike: {self.make} {self.model} ({self.plate}) [{status}] Engine: {self.engine_cc} cc"

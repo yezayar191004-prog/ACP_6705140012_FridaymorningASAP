@@ -6,13 +6,11 @@ from rental import Vehicle, Renter, ElectricCar, Motorbike
 car = Vehicle("Toyota", "Yaris", "1AB234")
 electric_car = ElectricCar("Tesla", "Model 3", "EV1234", 75)
 motorbike = Motorbike("Honda", "Click", "MB5678", 125)
-
 renter = Renter("Alice", 12345)
 
 print("Initial vehicles:")
-print(car)
-print(electric_car)
-print(motorbike)
+for vehicle in (car, electric_car, motorbike):
+    print(vehicle)
 
 # Rent and return a vehicle
 car.rent()
@@ -45,4 +43,15 @@ except ValueError as e:
 try:
     renter.name = ""
 except ValueError as e:
-    print("Bad name update....
+    print("Bad name update caught:", e)
+
+try:
+    renter.license_no = -5
+except ValueError as e:
+    print("Bad licence update caught:", e)
+
+print("\nPolymorphism demo:")
+fleet = [Vehicle("Mazda", "2", "ABC123"), ElectricCar("Nissan", "Leaf", "EV999", 40), Motorbike("Yamaha", "R15", "MB2468", 155)]
+for item in fleet:
+    print(item)
+
